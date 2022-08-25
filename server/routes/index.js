@@ -41,17 +41,30 @@ router.get('/adana', async function (req, res) {
   }
 });
 
-router.post('/fakeilce', async function (req, res) {
-
-  for (var i = 0; i < 100; i++) {
-    const mahalle = faker.address.streetAddress();
-    const saat = faker.datatype.number();
-    const user = new IlceSchema({
-      mahalle: mahalle,
-      saat: saat
-    })
-    user.save();
+router.get('/mersin/akdeniz', async function (req, res) {
+  try {
+    const dist = await IlceSchema.find({ city: "mersin", ilce: "Akdeniz" });
+    res.json(dist);
+  } catch (err) {
+    console.error(err)
   }
+});
+
+router.post('/fakeilce', async function (req, res) {
+  const ilce = new IlceSchema({
+    mahalle: ["ABDULLAH ŞAHUTOĞLU MAHALLESİ", "ADANALIOĞLU MAHALLESİ", "ADANALIOĞLU LİMONLU MAHALLESİ"],
+    saat: 123
+  });
+  ilce.save();
+  // for (var i = 0; i < 100; i++) {
+  //   const mahalle = faker.address.streetAddress();
+  //   const saat = faker.datatype.number();
+  //   const user = new IlceSchema({
+  //     mahalle: mahalle,
+  //     saat: saat
+  //   })
+  //   user.save();
+  // }
   res.json('data created')
 });
 

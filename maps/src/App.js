@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import CityData from './CityData';
 import Navbar from './Navbar';
+import DistrictData from './DistrictData';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibGFka2E2IiwiYSI6ImNsNzBocHp3dzBlaWszcXF5bTBybnBkYXcifQ.rQ7Y57HYxsd1x-lpXKdwrA';
 
@@ -12,6 +13,7 @@ const App = () => {
   const [lat, setLat] = useState(36.7000);
   const [zoom, setZoom] = useState(7.2);
   const [cityName, setCityName] = useState('');
+  const [district, setDistrict] = useState('');
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -22,6 +24,7 @@ const App = () => {
       zoom: zoom
     });
     map.current.scrollZoom.disable();
+    map.current.doubleClickZoom.disable();
     map.current.on('load', () => {
       map.current.addSource('locations', {
         'type': 'geojson',
@@ -84,24 +87,34 @@ const App = () => {
 
 
   const renderCities = () => {
-    if (cityName === '') {
-
-    }
+    if (cityName === '') { }
     else {
-      return (<CityData cityName={cityName} />);
-
+      return (<CityData cityName={cityName} onDistSelect={setDistrict} />);
     }
+  }
 
+  const renderDistrict = () => {
+    if (district === '') { }
+    else {
+      return (<DistrictData district={district} cityName={cityName} />);
+    }
   }
 
   return (
     <div >
       <Navbar />
       <div className="container">
-        <div className="col-md-6">
-          <div ref={mapContainer} id="map" className="map-container" />
-          <div>{renderCities()}</div>
+        <div className="row">
+          <div className="col-md-6">
+            <div ref={mapContainer} id="map" className="map-container" />
+            <div>{cityName}</div>
+            <div>{renderCities()}</div>
+          </div>
+          <div className="col-md-6">
+            {renderDistrict()}
+          </div>
         </div>
+
       </div>
 
     </div>
