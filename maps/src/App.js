@@ -13,7 +13,7 @@ const App = () => {
   const [lat, setLat] = useState(36.7000);
   const [zoom, setZoom] = useState(7.2);
   const [cityName, setCityName] = useState('');
-  const [district, setDistrict] = useState('');
+  //const [district, setDistrict] = useState('');
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -23,6 +23,8 @@ const App = () => {
       center: [lng, lat],
       zoom: zoom
     });
+
+
     map.current.scrollZoom.disable();
     map.current.doubleClickZoom.disable();
     map.current.on('load', () => {
@@ -89,16 +91,17 @@ const App = () => {
   const renderCities = () => {
     if (cityName === '') { }
     else {
-      return (<CityData cityName={cityName} onDistSelect={setDistrict} />);
+      return (<CityData cityName={cityName} />);
+      // return (<CityData cityName={cityName} onDistSelect={setDistrict} />);
     }
   }
 
-  const renderDistrict = () => {
-    if (district === '') { }
-    else {
-      return (<DistrictData district={district} cityName={cityName} />);
-    }
-  }
+  // const renderDistrict = () => {
+  //   if (district === '') { }
+  //   else {
+  //     return (<DistrictData district={district} cityName={cityName} />);
+  //   }
+  // }
 
   return (
     <div >
@@ -111,7 +114,7 @@ const App = () => {
             <div>{renderCities()}</div>
           </div>
           <div className="col-md-6">
-            {renderDistrict()}
+            {/* {renderDistrict()} */}
           </div>
         </div>
 

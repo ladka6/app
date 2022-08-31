@@ -1,11 +1,10 @@
 import React from "react";
 
-const CityItem = ({ ilce, saat, onDistSelect }) => {
-
+const CityItem = ({ ilce, saat, }) => {
 
   return (
-    <button className="list-group-item list-group-item-action d-flex justify-content-between align-items-start" onClick={() => onDistSelect(ilce)}>
-      <div className="ms-2 me-auto">
+    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${ilce}`} aria-expanded="false" aria-controls={ilce} >
+      <div className="justify-content ms-2 me-auto">
         <div className="fw-bold">{ilce}</div>
       </div>
       <span className="badge bg-primary rounded-pill">{saat}</span>

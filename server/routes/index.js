@@ -41,7 +41,7 @@ router.get('/adana', async function (req, res) {
   }
 });
 
-router.get('/mersin/akdeniz', async function (req, res) {
+router.get('/mersin/Akdeniz', async function (req, res) {
   try {
     const dist = await IlceSchema.find({ city: "mersin", ilce: "Akdeniz" });
     res.json(dist);
@@ -117,5 +117,8 @@ router.post('/fakehatay', async function (req, res) {
 
   res.json('data created')
 });
+
+
+
 
 module.exports = router;

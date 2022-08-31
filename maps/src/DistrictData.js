@@ -9,7 +9,7 @@ const DistrictData = (props) => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`/${props.cityName}/${props.district}`);
+      const res = await axios.get(`/${props.cityName}/${props.ilce}`);
       setSaat(res.data[0].saat);
       setNeighbourhoods(res.data[0].mahalle);
     }
@@ -17,23 +17,27 @@ const DistrictData = (props) => {
   }, [props])
 
   const renderedData = neighbourhoods.map((neighbourhood, index) => {
-    return <DistrictItem key={index} neighbourhood={neighbourhood} saat={saat} index={index + 1} />
+    return <DistrictItem neighbourhood={neighbourhood} saat={saat} index={index + 1} />
   })
 
   return (
-    <div style={{ width: "500px" }}>
-      <table className="table">
-        <thead className="table-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Mahalle</th>
-            <th scope="col">Saat</th>
-          </tr>
-        </thead>
-        <tbody >
-          {renderedData}
-        </tbody>
-      </table>
+    <div id={props.ilce} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionData">
+      <div className="accordion-body py-2 px-0">
+        <div >
+          <table className="table">
+            <thead className="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mahalle</th>
+                <th scope="col">Saat</th>
+              </tr>
+            </thead>
+            <tbody >
+              {renderedData}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

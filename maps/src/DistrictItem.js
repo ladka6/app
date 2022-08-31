@@ -2,8 +2,6 @@ import React from "react";
 
 const DistrictItem = ({ neighbourhood, saat, index }) => {
 
-  console.log(neighbourhood);
-
   return (
     <tr>
       <th scope="row">{index}</th>
